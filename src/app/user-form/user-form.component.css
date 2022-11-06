@@ -1,0 +1,14 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.red {
+  color: red;
+}

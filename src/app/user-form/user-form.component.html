@@ -1,0 +1,67 @@
+<form [formGroup]="userForm" id="user-form" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <label>Username</label>
+    <input type="text" formControlName="username" required />
+  </div>
+  <div
+    *ngIf="username.invalid && (username.dirty || username.touched)"
+    class="red"
+  >
+    <div *ngIf="username.errors?.['required']">Username is required.</div>
+    <div *ngIf="username.errors?.['minlength']">
+      Username must be at least 3 characters long.
+    </div>
+    <div *ngIf="username.errors?.['maxLength']">
+      Username must be less than 24 characters long.
+    </div>
+  </div>
+
+  <div class="row">
+    <label>Email</label>
+    <input type="text" formControlName="email" required />
+  </div>
+  <div *ngIf="email.invalid && (email.dirty || email.touched)" class="red">
+    <div *ngIf="email.errors?.['required']">Email is required.</div>
+    <div *ngIf="email.errors?.['email']">Email is not valid</div>
+  </div>
+
+  <div class="row">
+    <label>Type</label>
+    <select formControlName="type" required>
+      <option value="admin">Admin</option>
+      <option value="user">User</option>
+    </select>
+  </div>
+  <div *ngIf="type.invalid && (type.dirty || type.touched)" class="red">
+    <div *ngIf="type.errors?.['required']">Type is required.</div>
+  </div>
+
+  <div class="row">
+    <label>Password</label>
+    <input type="password" formControlName="password" required />
+  </div>
+  <div
+    *ngIf="password.invalid && (password.dirty || password.touched)"
+    class="red"
+  >
+    <div *ngIf="password.errors?.['required']">Password is required.</div>
+    <div *ngIf="password.errors?.['minlength']">
+      Password must be at least 3 characters long.
+    </div>
+    <div *ngIf="password.errors?.['maxLength']">
+      Password must be less than 24 characters long.
+    </div>
+    <div *ngIf="password.errors?.['pattern']">
+      Password must contain at least 1 lowercase letter, 1 uppercase letter, 1
+      number, 1 special character
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    form="user-form"
+    [disabled]="!userForm.valid || !formActive"
+  >
+    Submit
+  </button>
+</form>
