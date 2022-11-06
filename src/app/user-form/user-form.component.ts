@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AppService } from '../app.service';
-import { passwordValidator } from '../validators/password.validator';
+import { oneLowercaseCharacterValidator } from './validators/one-lowercase.validator';
+import { oneSpecialCharacterValidator } from './validators/one-special.validator';
+import { oneUppercaseCharacterValidator } from './validators/one-uppercase.validator';
 
 // CODE HERE
 //
@@ -38,9 +40,12 @@ export class UserFormComponent implements OnInit {
       [
         Validators.minLength(3),
         Validators.maxLength(24),
-        Validators.pattern(
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[ !"#$%&'()*+,\-\.\/:;<=>?@\[\\\]^_`{|}~])[A-Za-z\d@ !"#$%&'()*+,\-\.\/:;<=>?@\[\\\]^_`{|}~]+$/
-        ),
+        oneUppercaseCharacterValidator(),
+        oneLowercaseCharacterValidator(),
+        oneSpecialCharacterValidator(),
+        // Validators.pattern(
+        //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[ !"#$%&'()*+,\-\.\/:;<=>?@\[\\\]^_`{|}~])[A-Za-z\d@ !"#$%&'()*+,\-\.\/:;<=>?@\[\\\]^_`{|}~]+$/
+        // ),
       ],
     ],
   });
