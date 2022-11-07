@@ -72,15 +72,19 @@ export class UserFormComponent implements OnInit {
 
   ngOnInit() {}
 
-  onSubmit() {
+  async onSubmit() {
     this.formActive = false;
-    this.appService
-      .createUser(this.userForm.value)
-      .then(() => {
-        this.formActive = true;
-      })
-      .catch(() => {
-        this.formActive = true;
+    try {
+      await this.appService.createUser({
+        username: this.username.value,
+        email: this.email.value,
+        type: this.type.value,
+        password: this.password.value,
       });
+    } catch (e) {
+      console.error(e);
+    } finally {
+      this.formActive = true;
+    }
   }
 }
